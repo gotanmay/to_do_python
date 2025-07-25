@@ -36,7 +36,7 @@ while True:
 
     if choice == '1':
         task = input("Enter task: ")
-        tasks.append(task)
+        tasks.append({"title": task, "completed": False })
         print("Task added!")
         unsaved_changes = True
 
@@ -46,7 +46,8 @@ while True:
         else:
             print('Your tasks:')
             for i, task in enumerate(tasks, start=1):
-                print(f"{i}: {task}")
+                status = "Completed" if task["completed"] else "Not completed"
+                print(f"{i}. {task["title"]} [{status}]")
 
     elif choice == '3':
         delete_task_num = int(input("Enter the number of the task to delete: "))
