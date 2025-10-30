@@ -31,6 +31,8 @@ def show_menu():
     print("4. Exit")
     print("5. Mark Task as Completed")
     print("6. Edit Task")
+    print("7. Search Tasks")
+    print("8. Filter Tasks")
 
 while True:
     show_menu()
@@ -89,6 +91,23 @@ while True:
             unsaved_changes = True
         else:
             print("Invalid task number or to-do is empty!")
+
+    elif choice == '7':
+        keyword = input("Enter keyword to search (title, priority (1, 2, 3), or due date (YYYY-MM-DD): ").strip().lower()
+        results = [
+            task for task in tasks
+            if keyword in task["title"].lower()
+               or keyword in task["priority"].lower()
+               or keyword in task["due"].lower()
+        ]
+
+        if not results:
+            print("No tasks found matching that keyword.")
+        else:
+            print("\nMatching Tasks:")
+            for i, task in enumerate(results, start=1):
+                status = "Completed" if task["completed"] else "Not completed"
+                print(f"{i}. {task['title']} [{status}] [Priority: {task['priority']}] [Due: {task['due']}]")
 
     else:
         print("Invalid choice entered.")
