@@ -147,6 +147,5 @@ while True:
                 status = "Completed" if task["completed"] else "Not completed"
                 print(f"{i}. {task['title']} [{status}] [Priority: {task['priority']}] [Due: {task['due']}]")
 
-
     else:
         print("Invalid choice entered.")
