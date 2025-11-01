@@ -109,5 +109,43 @@ while True:
                 status = "Completed" if task["completed"] else "Not completed"
                 print(f"{i}. {task['title']} [{status}] [Priority: {task['priority']}] [Due: {task['due']}]")
 
+    elif choice == '8':
+        print("\nFilter Options:")
+        print("1. Show Completed Tasks")
+        print("2. Show Pending Tasks")
+        print("3. Filter by Priority")
+        print("4. Filter by Due Date")
+        filter_choice = input("Choose filter: ")
+
+        if filter_choice == '1':
+            filtered = [t for t in tasks if t["completed"]]
+            heading = "Completed Tasks:"
+
+        elif filter_choice == '2':
+            filtered = [t for t in tasks if not t["completed"]]
+            heading = "Pending Tasks:"
+
+        elif filter_choice == '3':
+            priority_level = input("Enter priority level (1/2/3): ").strip()
+            filtered = [t for t in tasks if t["priority"] == priority_level]
+            heading = f"Tasks with priority {priority_level}"
+
+        elif filter_choice == '4':
+            date_filter = input("Enter due date to filter (YYYY-MM-DD): ").strip()
+            filtered = [t for t in tasks if t["due"] == date_filter]
+            heading = f"Tasks due on ({date_filter})"
+
+        else:
+            print("Invalid filter option.")
+            continue
+
+        if not filtered:
+            print("No tasks found for this filter.")
+        else:
+            print(heading)
+            for i, task in enumerate(filtered, start=1):
+                status = "Completed" if task["completed"] else "Not completed"
+                print(f"{i}. {task['title']} [{status}] [Priority: {task['priority']}] [Due: {task['due']}]")
+
     else:
         print("Invalid choice entered.")
